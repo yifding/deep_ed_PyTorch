@@ -1,4 +1,4 @@
-# Research coding practice, rewrite deep-ed in python/pytorch
+# PyTorch Implementation of deep-ed
 
 ## step1. create wikipedia_p_e_m
 #### Input: **basic_data/textWithAnchorsFromAllWikipedia2014Feb.txt**
