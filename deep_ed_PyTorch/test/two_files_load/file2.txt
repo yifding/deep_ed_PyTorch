@@ -1,0 +1,6 @@
+file2-line1
+file2-line2
+file2-line3
+file2-line4
+file2-line5
+file2-line6

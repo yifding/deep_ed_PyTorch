@@ -1,0 +1,28 @@
+$ python train.py
+
+====> load w2v model from file
+    ----> load w2v model from file finished
+  ---> from json file.
+    Done loading word freq index. Num words = 495091; total freq = 829907608.0
+  ---> from pt file.
+====> load w2v model from file
+    ----> load w2v model from file finished
+  ---> from json file.
+    Done loading word freq index. Num words = 495091; total freq = 829907608.0
+==> Loading relatedness validate
+==> Loading relatedness test
+==> Loading relatedness thid tensor
+    Done loading relatedness sets. Num queries test = 3319. Num queries valid = 3673. Total num ents restricted set = 268745
+==> Loading disambiguation index
+    Done loading disambiguation index
+==> Loading redirects index
+    Done loading redirects index
+==> Loading entity wikiid - name map
+  ---> from json file: /scratch365/yding4/EL_resource/data/deep_ed_PyTorch_data/generated/ent_name_id_map_RLTD.json
+    Done loading entity name - wikiid. Size thid index = 268745
+    Done loading entity name - wikiid. Size num2ent index = 267186
+==> Loading entity freq map
+    Done loading entity freq index. Size = 3116177
+look_up_table.weight.size(0) 268746
+self.ent_name_id.get_total_num_ents() 268745
+==> Loading training data with option RAM

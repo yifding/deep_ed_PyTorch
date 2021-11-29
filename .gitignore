@@ -1,0 +1,17 @@
+.DS_Store
+CRC*
+deep_ed_PyTorch.egg-info
+build/
+__pycache__/
+*.so
+*.cpp
+*.lock
+*.json
+*.jsonl
+*.train
+*.dev
+*.log
+*.pyc
+runs/
+
+RUN_FILES/
