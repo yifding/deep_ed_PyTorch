@@ -1,4 +1,24 @@
-# PyTorch Implementation of deep-ed
+# PyTorch Implementation of "Deep Joint Entity Disambiguation with Local Neural Attention"
+
+This is a Pytorch implementation of deep-ed https://arxiv.org/abs/1704.04920, 
+
+This implementation has almost exactly the same data pre-processing and post-processing flow as original implementation 
+in torch with lua.
+
+
+
+## Install
+1) install necessary package
+```bash
+$ pip install -r reqquirements.txt
+```
+
+2) Download data files needed for training and testing from [this link](https://drive.google.com/uc?id=0Bx8d3azIm_ZcbHMtVmRVc1o5TWM&export=download).
+ Download basic_data.zip, unzip it and place the basic_data directory in deep_ed_PyTorch/data. All generated files will be build based on files in this basic_data/ directory.
+
+3) Download pre-trained Word2Vec vectors GoogleNews-vectors-negative300.bin.gz from https://code.google.com/archive/p/word2vec/.
+Unzip it and place the bin file in the folder deep_ed_PyTorch/data/basic_data/wordEmbeddings/Word2Vec.
+
 
 ## step1. create wikipedia_p_e_m
 #### Input: **basic_data/textWithAnchorsFromAllWikipedia2014Feb.txt**
