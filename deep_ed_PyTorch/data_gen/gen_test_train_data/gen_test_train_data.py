@@ -1,4 +1,5 @@
 import os
+import html
 import argparse
 
 from deep_ed_PyTorch import utils
@@ -53,12 +54,14 @@ class GenTestTrain(object):
                 start = line.find(doc_str_start)
                 end = line.find(doc_str_end)
                 cur_doc_name = line[start + len(doc_str_start): end]
-                cur_doc_name = cur_doc_name.replace('&amp;', '&')
+                # cur_doc_name = cur_doc_name.replace('&amp;', '&')
+                cur_doc_name = html.unescape(cur_doc_name)
                 cur_doc_text = ''
                 with open(os.path.join(path, 'RawText/' + cur_doc_name), 'r') as raw_reader:
                     for txt_line in raw_reader:
                         cur_doc_text += txt_line.rstrip('\n') + ' '
-                cur_doc_text = cur_doc_text.replace('&amp;', '&')
+                # cur_doc_text = cur_doc_text.replace('&amp;', '&')
+                cur_doc_text = html.unescape(cur_doc_text)
 
             else:
                 if '<annotation>' in line:
@@ -68,7 +71,8 @@ class GenTestTrain(object):
                     m_start = line.find('<mention>') + len('<mention>')
                     m_end = line.find('</mention>')
                     cur_mention = line[m_start: m_end]
-                    cur_mention = cur_mention.replace('&amp;', '&')
+                    # cur_mention = cur_mention.replace('&amp;', '&')
+                    cur_mention = html.unescape(cur_mention)
 
                     line = reader.readline()
                     # assert '<wikiName>' in line and '</wikiName>' in line

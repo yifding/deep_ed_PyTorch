@@ -1,5 +1,6 @@
 import os
 import json
+import html
 import argparse
 
 from deep_ed_PyTorch.data_gen.gen_p_e_m import UnicodeMap
@@ -46,8 +47,10 @@ class GenPEMFromYago(object):
 
                 mention = parts[0][1:-1]
                 ent_name = parts[1]
-                ent_name = ent_name.replace('&amp;', '&')
-                ent_name = ent_name.replace('&quot;', '"')
+                # ent_name = ent_name.replace('&amp;', '&')
+                # ent_name = ent_name.replace('&quot;', '"')
+                # **YD** use html.unescape to process all the symbols from html to original symbol string
+                ent_name = html.unescape(ent_name)
                 while '\\u' in ent_name:
                     start = ent_name.find('\\u')
                     code = ent_name[start: start + 6]
