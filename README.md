@@ -14,6 +14,7 @@ in torch with lua.
 1) install necessary package
 ```bash
 $ git clone https://github.com/yifding/deep_ed_PyTorch.git
+$ conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=10.2 -c pytorch
 $ cd /path/to/deep_ed_PyTorch
 $ pip install -r requirements.txt 
 $ pip install --editable . 
