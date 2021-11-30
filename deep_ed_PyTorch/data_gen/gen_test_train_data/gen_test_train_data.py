@@ -16,6 +16,9 @@ class GenTestTrain(object):
         self.ent_name_id = EntNameID(args)
         self.yago_crosswikis_wiki = YagoCrosswikisWiki(args)
 
+        output_dir = os.path.join(self.args.root_data_dir, 'generated/test_train_data')
+        os.makedirs(output_dir, exist_ok=True)
+
         # **YD** debug
         for dataset in args.datasets:
             self.gen_test_ace(dataset)
