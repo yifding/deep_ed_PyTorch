@@ -2,6 +2,9 @@
 
 This is a Pytorch implementation of deep-ed https://arxiv.org/abs/1704.04920, 
 
+<img src="./deep-ed.png" width="500">
+
+
 This implementation has almost exactly the same data pre-processing and post-processing flow as original implementation 
 in torch with lua.
 
@@ -10,7 +13,7 @@ in torch with lua.
 ## Install
 1) install necessary package
 ```bash
-$ pip install -r reqquirements.txt
+$ pip install -r requirements.txt
 ```
 
 2) Download data files needed for training and testing from [this link](https://drive.google.com/uc?id=0Bx8d3azIm_ZcbHMtVmRVc1o5TWM&export=download).
