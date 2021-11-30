@@ -13,11 +13,14 @@ in torch with lua.
 ## Install
 1) install necessary package
 ```bash
-$ pip install -r requirements.txt
+$ git clone https://github.com/yifding/deep_ed_PyTorch.git
+$ cd /path/to/deep_ed_PyTorch
+$ pip install -r requirements.txt 
+$ pip install --editable . 
 ```
 
 2) Download data files needed for training and testing from [this link](https://drive.google.com/uc?id=0Bx8d3azIm_ZcbHMtVmRVc1o5TWM&export=download).
- Download basic_data.zip, unzip it and place the basic_data directory in deep_ed_PyTorch/data. All generated files will be build based on files in this basic_data/ directory.
+ Download basic_data.zip, unzip it and place the basic_data directory in **ROOT_DATA_DIR=deep_ed_PyTorch/data/**. All generated files will be build based on files in this basic_data/ directory.
 
 3) Download pre-trained Word2Vec vectors GoogleNews-vectors-negative300.bin.gz from https://code.google.com/archive/p/word2vec/.
 Unzip it and place the bin file in the folder deep_ed_PyTorch/data/basic_data/wordEmbeddings/Word2Vec.
