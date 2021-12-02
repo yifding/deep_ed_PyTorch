@@ -1,4 +1,5 @@
 import os
+import re
 import html
 import argparse
 
@@ -57,14 +58,16 @@ class GenTestTrain(object):
                 start = line.find(doc_str_start)
                 end = line.find(doc_str_end)
                 cur_doc_name = line[start + len(doc_str_start): end]
-                # cur_doc_name = cur_doc_name.replace('&amp;', '&')
-                cur_doc_name = html.unescape(cur_doc_name)
+                while '&amp;' in cur_doc_name:
+                    cur_doc_name = cur_doc_name.replace('&amp;', '&')
+                # cur_doc_name = html.unescape(cur_doc_name)
                 cur_doc_text = ''
                 with open(os.path.join(path, 'RawText/' + cur_doc_name), 'r') as raw_reader:
                     for txt_line in raw_reader:
                         cur_doc_text += txt_line.rstrip('\n') + ' '
-                # cur_doc_text = cur_doc_text.replace('&amp;', '&')
-                cur_doc_text = html.unescape(cur_doc_text)
+                while '&amp;' in cur_doc_text:
+                    cur_doc_text = cur_doc_text.replace('&amp;', '&')
+                # cur_doc_text = html.unescape(cur_doc_text)
 
             else:
                 if '<annotation>' in line:
@@ -74,8 +77,8 @@ class GenTestTrain(object):
                     m_start = line.find('<mention>') + len('<mention>')
                     m_end = line.find('</mention>')
                     cur_mention = line[m_start: m_end]
-                    # cur_mention = cur_mention.replace('&amp;', '&')
-                    cur_mention = html.unescape(cur_mention)
+                    while '&amp;' in cur_mention:
+                        cur_mention = cur_mention.replace('&amp;', '&')
 
                     line = reader.readline()
                     # assert '<wikiName>' in line and '</wikiName>' in line
@@ -93,7 +96,7 @@ class GenTestTrain(object):
                     assert '<length>' in line and '</length>' in line
                     len_start = line.find('<length>') + len('<length>')
                     len_end = line.find('</length>')
-                    length = int(line[len_start: len_end])
+                    # length = int(line[len_start: len_end])
                     length = len(cur_mention)
 
                     line = reader.readline()
@@ -103,9 +106,24 @@ class GenTestTrain(object):
                     assert '</annotation>' in line
 
                     offset = max(0, offset - 10)
-
                     while cur_doc_text[offset: offset + length] != cur_mention:
                         offset = offset + 1
+
+                        # **YD** debug
+                        if offset >= len(cur_doc_text):
+                            print(f"cur_mention:{cur_mention}; cur_ent_title:{cur_ent_title}")
+                            print(repr(cur_doc_text))
+                            import sys
+                            sys.exit()
+
+                    # **YD** rewrite the search logic, find the closest mention which has fewer or equal positions
+                    # compared to labelled offset.
+                    # candidate_offsets = [
+                    #     m.start() for m in re.finditer(cur_mention, cur_doc_text)
+                    # ]
+                    # candidate_offsets = sorted(candidate_offsets, key=lambda x: abs(x-offset))
+                    # assert len(candidate_offsets) > 0
+                    # offset = candidate_offsets[0]
 
                     # **YD** preprocess_mention has been implemented
                     cur_mention = self.yago_crosswikis_wiki.preprocess_mention(cur_mention)
