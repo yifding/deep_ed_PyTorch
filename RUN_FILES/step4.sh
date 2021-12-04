@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #$-m abe
-#$-M dyfdyf0125@gmail.edu
+#$-M dyfdyf0125@gmail.com
 #$-q gpu # specify the queue
 #$-l gpu_card=4
 #$-N CRC_step4
