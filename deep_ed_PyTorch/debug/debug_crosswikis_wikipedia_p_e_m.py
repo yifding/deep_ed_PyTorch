@@ -53,7 +53,7 @@ def process_cross_dict(file):
 
 
 lua_cross = '/scratch365/yding4/EL_resource/data/deep_ed_data/generated/crosswikis_wikipedia_p_e_m.txt'
-py_cross = '/scratch365/yding4/EL_resource/data/deep_ed_PyTorch_data/generated/crosswikis_wikipedia_p_e_m.txt'
+py_cross = '/scratch365/yding4/deep_ed_PyTorch/data/generated/crosswikis_wikipedia_p_e_m.txt'
 
 assert os.path.isfile(lua_cross)
 assert os.path.isfile(py_cross)

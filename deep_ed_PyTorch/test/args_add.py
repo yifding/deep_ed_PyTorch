@@ -23,7 +23,8 @@ def main():
     parser.add_argument(
         '--root_data_dir',
         type=str,
-        default='/scratch365/yding4/EL_resource/data/deep_ed_PyTorch_data/',
+        # default='/scratch365/yding4/deep_ed_PyTorch/data/',
+        required=True,
         help='Root path of the data, $DATA_PATH.',
     )
 

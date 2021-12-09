@@ -2,7 +2,7 @@ import torch
 import gensim
 
 
-w2v_model_path = '/scratch365/yding4/EL_resource/data/deep_ed_PyTorch_data/basic_data/wordEmbeddings/Word2Vec/GoogleNews-vectors-negative300.bin'
+w2v_model_path = '/scratch365/yding4/deep_ed_PyTorch/data/basic_data/wordEmbeddings/Word2Vec/GoogleNews-vectors-negative300.bin'
 
 w2v_model = gensim.models.KeyedVectors.load_word2vec_format(w2v_model_path, binary=True)
 

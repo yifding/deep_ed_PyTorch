@@ -1,7 +1,7 @@
 import os
 import json
 
-file = '/scratch365/yding4/EL_resource/data/deep_ed_PyTorch_data/basic_data/relatedness/validate.svm'
+file = '/scratch365/yding4/deep_ed_PyTorch/data/basic_data/relatedness/validate.svm'
 """
 id = dict()
 with open(file, 'r') as reader:
