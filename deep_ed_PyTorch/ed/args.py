@@ -83,7 +83,8 @@ def arg_parse():
     parser.add_argument(
         '--ent_vecs_filename',
         type=str,
-        default='ent_vecs__ep_231.pt',
+        # default='ent_vecs__ep_231.pt',
+        required=True,
         help='File name containing entity vectors generated with entities/learn_e2v/learn_a.py',
     )
 
