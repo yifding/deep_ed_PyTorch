@@ -2,7 +2,7 @@
 
 #$-m abe
 #$-M dyfdyf0125@gmail.com
-#$-q gpu@qa-xp-016 # specify the queue
+#$-q gpu@qa-titanx-001 # specify the queue
 #$-l gpu_card=0
 #$-N CRC_step9_entity_embedding
 
