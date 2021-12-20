@@ -69,7 +69,7 @@ class GenWikiHypTrainData(object):
                         elif wstart:
                             mention_idx = w[len('MMSTART'):]
                             assert int(mention_idx) > 0, w
-                            line_mentions[mention_idx] = {'start_off': cur_words_num + 1, 'end_off': -1}
+                            line_mentions[mention_idx] = {'start_off': cur_words_num, 'end_off': -1}
 
                         elif wend:
                             num_added_hyp += 1
