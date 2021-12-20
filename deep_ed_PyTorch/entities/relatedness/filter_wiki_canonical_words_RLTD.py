@@ -61,6 +61,29 @@ if __name__ == "__main__":
         help='Root path of the data, $DATA_PATH.',
     )
 
+    parser.add_argument(
+        '--rltd_entity_source',
+        type=str,
+        choices=["ed_train", "entity_name_files"],
+        default="ed_train",
+        help='rltd_entity_source to inject entity set.',
+    )
+
+    parser.add_argument(
+        '--rltd_ed_train_files',
+        type=eval,
+        default="['aida_train.csv','aida_testA.csv','aida_testB.csv',"
+                "'wned-aquaint.csv','wned-msnbc.csv','wned-ace2004.csv','wned-clueweb.csv','wned-wikipedia.csv']",
+        help='rltd_ed_train_files',
+    )
+
+    parser.add_argument(
+        '--rltd_entity_name_files',
+        type=eval,
+        default="[]",
+        help='rltd_entity_name_files',
+    )
+
     args = parser.parse_args()
     print(args)
     test(args)

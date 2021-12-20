@@ -31,6 +31,21 @@ class REWTR(object):
 
         self.ent_lines_4EX = ExWikiWords()
 
+        if not hasattr(args, "rltd_entity_source") or args.rltd_entity_source is None:
+            self.args.rltd_entity_source = "ed_train"
+        elif self.args.rltd_entity_source == "ed_train":
+            pass
+        elif self.args.rltd_entity_source == "entity_name_files":
+            assert hasattr(self.args, "rltd_entity_name_files") and type(self.args.rltd_entity_name_files) is list
+        else:
+            raise ValueError("Unknown rltd entity source !")
+
+        if not hasattr(args, "rltd_ed_train_files") or args.rltd_ed_train_files is None:
+            self.args.rltd_ed_train_files = [
+                'aida_train.csv', 'aida_testA.csv', 'aida_testB.csv',
+                'wned-aquaint.csv', 'wned-msnbc.csv', 'wned-ace2004.csv', 'wned-clueweb.csv', 'wned-wikipedia.csv'
+            ]
+
         # **YD** self.load_reltd_set has been implemented
         """
         reltd structure (all number is in string format used in torch):
@@ -86,30 +101,45 @@ class REWTR(object):
 
             # print('after small dataset: ', len(rltd_all_ent_wikiids))
             # -- 2) From all ED datasets:
-            files = ['aida_train.csv', 'aida_testA.csv', 'aida_testB.csv',
-                     'wned-aquaint.csv', 'wned-msnbc.csv', 'wned-ace2004.csv',
-                     'wned-clueweb.csv', 'wned-wikipedia.csv']
+            # files = ['aida_train.csv', 'aida_testA.csv', 'aida_testB.csv',
+            #          'wned-aquaint.csv', 'wned-msnbc.csv', 'wned-ace2004.csv',
+            #          'wned-clueweb.csv', 'wned-wikipedia.csv']
 
-            for file in files:
-                file_file = os.path.join(args.root_data_dir, 'generated/test_train_data/' + file)
-                with open(file_file, 'r') as reader:
-                    for line in reader:
-                        line = line.rstrip('\t\n')
-                        parts = line.split('\t')
+            if self.args.rltd_entity_source == "ed_train":
+                for file in self.args.rltd_ed_train_files:
+                    file_file = os.path.join(args.root_data_dir, 'generated/test_train_data/' + file)
+                    with open(file_file, 'r') as reader:
+                        for line in reader:
+                            line = line.rstrip('\t\n')
+                            parts = line.split('\t')
 
-                        assert parts[5] == 'CANDIDATES'
-                        assert parts[-2] == 'GT:'
-                        if parts[6] != 'EMPTYCAND':
-                            # **YD** huge bug! for part in parts[7:-2]:
-                            for part in parts[6:-2]:
-                                p = part.split(',')
-                                ent_wikiid = int(p[0])
-                                rltd_all_ent_wikiids[ent_wikiid] = 1
+                            assert parts[5] == 'CANDIDATES'
+                            assert parts[-2] == 'GT:'
+                            if parts[6] != 'EMPTYCAND':
+                                # **YD** huge bug! for part in parts[7:-2]:
+                                for part in parts[6:-2]:
+                                    p = part.split(',')
+                                    ent_wikiid = int(p[0])
+                                    rltd_all_ent_wikiids[ent_wikiid] = 1
 
-                            p = parts[-1].split(',')
-                            if len(p) >= 2:
-                                ent_wikiid = int(p[1])
-                                assert ent_wikiid > 0, 'invalid wikiid'
+                                p = parts[-1].split(',')
+                                if len(p) >= 2:
+                                    ent_wikiid = int(p[1])
+                                    assert ent_wikiid > 0, 'invalid wikiid'
+
+            elif self.args.rltd_entity_source == "entity_name_files":
+                for entity_name_file in self.args.rltd_entity_name_files:
+                    file_path = os.path.join(args.root_data_dir, 'entity_data/' + entity_name_file)
+                    with open(file_path, 'r') as reader:
+                        for line in reader:
+                            parts = line.rstrip('\n').split('\t')
+                            assert len(parts) == 2
+                            ent_wikiid = int(parts[0])
+                            assert ent_wikiid > 0, 'invalid wikiid'
+                            rltd_all_ent_wikiids[ent_wikiid] = 1
+
+            else:
+                raise ValueError("Unknown rltd_entity_source !")
 
             # print('after EL dataset: ', len(rltd_all_ent_wikiids))
 
