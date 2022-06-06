@@ -4,6 +4,7 @@ This is a PyTorch implementation of deep-ed https://arxiv.org/abs/1704.04920, or
 
 <img src="./deep-ed.png" width="500">
 
+Memorizing Octavian-Eugen Ganea (1987-2022)
 
 This implementation has almost exactly the same data pre-processing and post-processing flow as original implementation 
 in torch with lua.
